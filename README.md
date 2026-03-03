@@ -1,60 +1,27 @@
-# nice!view-c
+# nice!view
 
-Ein custom nice!view Shield für ZMK Keyboards mit erweiterten Features und optimierten Widget-Funktionen.
+The nice!view is a low-power, high refresh rate display meant to replace I2C OLEDs traditionally used.
 
-## Übersicht
+This shield requires that an `&nice_view_spi` labeled SPI bus is provided with _at least_ MOSI, SCK, and CS pins defined.
 
-Dieses Repository enthält eine erweiterte Implementierung des nice!view Displays für ZMK KeymapCharts mit:
+## Custom widget
 
-- **Custom Status Screen**: Erweiterte Anzeige für Tastaturstatus, Batterie und Bluetooth-Profile
-- **Optimierte Widgets**: Hochperformante C-Implementierung für die Displayanzeige
-- **Shield Definition**: Vollständige ZMK Shield-Konfiguration
+The nice!view shield includes a custom vertical widget.
 
-## Struktur
+Profile indicators show the status of the first five BLE profiles using numbers from 1 to 5.
+The number corresponding to the currently selected profile is drawn in a filled disk
+and the circle outline around each profile number correspond to the following states:
 
-```
-├── boards/shields/nice_view-c/     # Shield Definitionsdateien
-│   ├── widgets/                    # Custom Widget-Implementierungen
-│   ├── nice_view-c.overlay         # Devicetree Overlay
-│   ├── nice_view-c.conf            # Konfigurationsdatei
-│   └── CMakeLists.txt              # Build-Konfiguration
-├── zephyr/                         # Zephyr Module Definition
-└── LICENSE                         # Lizenzinformation
-```
+- solid outline: connected
+- dashed outline: not connected
+- no outline: not bound
 
-## Installation
+## Disable custom widget
 
-Dieses Shield wird als Zephyr-Modul in ein ZMK-Projekt integriert:
-
-1. Kopiere dieses Verzeichnis in dein ZMK-Projekt
-2. Aktualisiere deine `west.yml` Konfiguration
-
-```yaml
-manifest:
-  projects:
-    # ... deine anderen Module ...
-    - name: nice-view-c
-      url: https://github.com/mrtnRitter/nice-view-c
-```
-
-3. Konfiguriere dein Shield in der `.conf` Datei:
+To use the built-in ZMK widget instead of the custom nice!view one, add the following item to your `.conf` file:
 
 ```
-CONFIG_SHIELD=nice_view_c
+CONFIG_ZMK_DISPLAY_STATUS_SCREEN_BUILT_IN=y
+CONFIG_ZMK_LV_FONT_DEFAULT_SMALL_MONTSERRAT_26=y
+CONFIG_LV_FONT_DEFAULT_MONTSERRAT_26=y
 ```
-
-## Custom Widgets
-
-Das Shield beinhaltet mehrere optimierte Widget-Funktionen:
-
-- **Status Widget**: Zeigt Bluetooth-Verbindungsstatus und Profile
-- **Battery Widget**: Batterie- und Ladestandanzeige
-- **Peripheral Status**: Unterbrechungstoggles und Statusanzeigen
-
-## Lizenz
-
-Dieses Projekt unterliegt der im `LICENSE` File festgelegten Lizenz.
-
-## Support
-
-Weitere Informationen zur Konfiguration und Verwendung findest du in der Dokumentation der einzelnen Shield-Komponenten.
