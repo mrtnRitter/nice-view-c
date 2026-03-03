@@ -1,7 +1,7 @@
 # Copyright (c) 2023 The ZMK Contributors
 # SPDX-License-Identifier: MIT
 
-if SHIELD_NICE_VIEW-C
+if SHIELD_NICE_VIEW_C
 
 config LV_Z_VDB_SIZE
     default 100
@@ -53,4 +53,4 @@ endif # !ZMK_SPLIT || ZMK_SPLIT_ROLE_CENTRAL
 config ZMK_DISPLAY_STATUS_SCREEN_BUILT_IN
     select LV_FONT_MONTSERRAT_26
 
-endif # SHIELD_NICE_VIEW-C
+endif # SHIELD_NICE_VIEW_C
